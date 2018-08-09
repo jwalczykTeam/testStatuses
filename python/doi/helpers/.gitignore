@@ -1,0 +1,3 @@
+python/lib/VCAP_SERVICES.json
+js/lib/VCAP_SERVICES.json
+*.pyc

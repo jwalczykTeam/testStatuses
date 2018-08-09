@@ -1,0 +1,60 @@
+{
+  "local": {
+    "group_name": "mkrudele",
+    "work_dir": "/tmp/astro",
+    "api_key": "barabba",
+    "bluemix_info": {
+      "username": "${TEST_USER_NAME}",
+      "password": "${TEST_USER_PWD}",
+      "org_name": "${TEST_ORG_NAME}",
+      "space_name": "${BLUEMIX_SPACE}",
+      "target_api": "https://api.ng.bluemix.net"
+    },
+    "mh_config": {
+      "kafka": {
+        "bootstrap_servers": "localhost:9092"
+      }
+    },
+    "db_config": {
+      "elasticsearch": {
+        "hosts": ["localhost:9200"]
+      }
+    }
+  },
+  "remote": {
+    "group_name": "mkrudele",
+    "work_dir": "/tmp/astro",
+    "api_key": "barabba",
+    "scheduler_memory": 512,
+    "worker_memory": 512,
+    "image_name": "${ASTRO_DOCKER_IMAGE_NAME}",
+    "tear_down": true,
+    "bluemix_info": {
+      "username": "${TEST_USER_NAME}",
+      "password": "${TEST_USER_PWD}",
+      "org_name": "${TEST_ORG_NAME}",
+      "space_name": "${BLUEMIX_SPACE}",
+      "target_api": "https://api.ng.bluemix.net"
+    },
+    "containerbridge_app": "containerbridge"
+  },
+  "project_to_add": {
+    "name": "astro",
+    "description": "the new astro",
+    "skip_mining_future_data": false,
+    "sources": [
+      {
+        "source_type": "github_repo",
+        "api_base_url": "https://github.ibm.com/api/v3",
+        "access_token": "319922559f31d9bc589a00befcf7eba18033bf55",
+        "git_url": "https://github.ibm.com/ibmdevopsadtech/astro.git",
+        "repo_owner": "ibmdevopsadtech",
+        "repo_name": "astro",
+        "labels_map": [
+          { "label": "bug", "field": "issue_types", "value": "Defect" },
+          { "label": "enhancement", "field": "issue_types", "value": "Improvement" }
+        ]     
+      }
+    ]
+  }
+}

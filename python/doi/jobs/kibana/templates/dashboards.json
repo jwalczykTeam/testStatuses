@@ -1,0 +1,152 @@
+[
+  {
+    "_id": "__index__-authors",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Authors",
+      "hits": 0,
+      "description": "Show insights about who is contributing the most to the project, developers and companies.",
+      "panelsJSON": "[{\"col\":1,\"id\":\"__index__-top-20-contributors\",\"panelIndex\":1,\"row\":1,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"},{\"col\":7,\"id\":\"__index__-top-20-contributing-companies\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-file-changes",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ File Changes",
+      "hits": 0,
+      "description": "Show files that are most affected by changes, that are changed by many developers, that are changed because of bugs, and other cool things.",
+      "panelsJSON": "[{\"col\":1,\"id\":\"__index__-files-with-most-changes\",\"panelIndex\":4,\"row\":1,\"size_x\":4,\"size_y\":5,\"type\":\"visualization\"},{\"col\":9,\"id\":\"__index__-files-with-most-bugs\",\"panelIndex\":5,\"row\":1,\"size_x\":4,\"size_y\":5,\"type\":\"visualization\"},{\"col\":5,\"id\":\"__index__-files-with-most-authors-changing\",\"panelIndex\":6,\"row\":1,\"size_x\":4,\"size_y\":5,\"type\":\"visualization\"},{\"id\":\"__index__-total-number-of-files-changed-by-component\",\"type\":\"visualization\",\"panelIndex\":8,\"size_x\":4,\"size_y\":6,\"col\":1,\"row\":6},{\"id\":\"__index__-number-of-files-changed-by-time-and-component\",\"type\":\"visualization\",\"panelIndex\":9,\"size_x\":8,\"size_y\":6,\"col\":5,\"row\":6}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{\"P-8\":{\"spy\":{\"mode\":{\"name\":null,\"fill\":false}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issues",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Issues",
+      "hits": 0,
+      "description": "Give insights about issues that are affecting the project components.",
+      "panelsJSON": "[{\"col\":5,\"id\":\"__index__-issues-by-type-and-time\",\"panelIndex\":1,\"row\":1,\"size_x\":8,\"size_y\":4,\"type\":\"visualization\"},{\"col\":5,\"id\":\"__index__-issues-by-component-and-time\",\"panelIndex\":2,\"row\":5,\"size_x\":8,\"size_y\":6,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-total-number-of-issues-by-type\",\"panelIndex\":3,\"row\":1,\"size_x\":4,\"size_y\":4,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-total-number-of-issues-by-component\",\"panelIndex\":4,\"row\":5,\"size_x\":4,\"size_y\":6,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-total-number-of-issues-by-priority\",\"panelIndex\":5,\"row\":11,\"size_x\":4,\"size_y\":4,\"type\":\"visualization\"},{\"col\":5,\"id\":\"__index__-issues-by-priority-and-time\",\"panelIndex\":6,\"row\":11,\"size_x\":8,\"size_y\":4,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-predicted-defective-files",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Predicted Defective Files",
+      "hits": 0,
+      "description": "Make predictions on whether a file will get a bug in the next few weeks or so.",
+      "panelsJSON": "[{\"col\":1,\"columns\":[\"file_path\",\"probability\",\"reason\"],\"id\":\"__index__-defect-likelihood-with-explanation\",\"panelIndex\":201,\"row\":1,\"size_x\":12,\"size_y\":5,\"sort\":[\"probability\",\"desc\"],\"type\":\"search\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{\"P-13\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-5y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-social-coding",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Social Coding",
+      "hits": 0,
+      "description": "Show the activities of the team in a social coding graph.",
+      "panelsJSON": "[{\"id\":\"__index__-code-interactions-explanation\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":2,\"size_y\":8,\"col\":1,\"row\":1},{\"col\":3,\"id\":\"__index__-code-interactions\",\"panelIndex\":2,\"row\":1,\"size_x\":10,\"size_y\":8,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": false,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-advanced-metrics",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Advanced Metrics",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"col\":1,\"id\":\"__index__-entropy\",\"panelIndex\":1,\"row\":4,\"size_x\":6,\"size_y\":6,\"type\":\"visualization\"},{\"col\":7,\"id\":\"__index__-experience\",\"panelIndex\":2,\"row\":4,\"size_x\":6,\"size_y\":6,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-interval\",\"panelIndex\":3,\"row\":13,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"},{\"col\":7,\"id\":\"__index__-bugs\",\"panelIndex\":4,\"row\":13,\"size_x\":6,\"size_y\":5,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-entropy-explanation\",\"panelIndex\":5,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"__index__-experience-explanation\",\"panelIndex\":6,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":1,\"id\":\"__index__-interval-explanation\",\"panelIndex\":7,\"row\":10,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"},{\"col\":7,\"id\":\"__index__-bug-explanation\",\"panelIndex\":8,\"row\":10,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{\"P-1\":{\"vis\":{\"legendOpen\":false}},\"P-2\":{\"vis\":{\"legendOpen\":false}},\"P-3\":{\"vis\":{\"legendOpen\":false}},\"P-4\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"*\"}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-shame-board",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Shame Board",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"__index__-committer-did-not-reference-issue\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":6,\"size_y\":5,\"col\":1,\"row\":1},{\"id\":\"__index__-issue-creator-did-not-select-type-or-tag\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":6,\"size_y\":5,\"col\":7,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-commit-defect-likelihood",
+    "_type": "dashboard",
+    "_source": {
+      "title": "__title__ Commit Defect Likelihood",
+      "hits": 0,
+      "description": "",
+      "panelsJSON": "[{\"id\":\"__index__-commit-defect-likelihood\",\"type\":\"search\",\"panelIndex\":1,\"size_x\":12,\"size_y\":6,\"col\":1,\"row\":1,\"columns\":[\"commit_id\",\"defect_likelihood\"],\"sort\":[\"timestamp\",\"desc\"]}]",
+      "optionsJSON": "{\"darkTheme\":true}",
+      "uiStateJSON": "{}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-2y",
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}}}]}"
+      }
+    }
+  }
+]

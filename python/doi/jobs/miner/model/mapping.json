@@ -1,0 +1,1660 @@
+{
+  "mappings": {
+      "file_defect_prediction": {
+         
+        "properties": {
+          "DefectiveCommit": {
+            "type": "long"
+          },
+          "action": {
+            "type": "string"
+          },
+          "feature_to_point": {
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "double"
+              }
+            }
+          },
+          "file_path": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            },
+            "analyzer": "pathname_analyzer",
+            "search_analyzer": "keyword"
+          },
+          "leaf": {
+            "type": "string"
+          },
+          "defect_likelihood": {
+            "type": "string"
+          },          
+          "odds": {
+            "type": "double"
+          },
+          "point": {
+            "type": "double"
+          },
+          "prediction": {
+            "type": "double"
+          },
+          "probability": {
+            "type": "double"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "truth": {
+            "type": "long"
+          },
+          "url": {
+            "type": "string"
+          },
+          "window": {
+            "type": "long"
+          }
+        }
+      },
+      "issue": {
+         
+        "properties": {
+          "issue_assignee_uri": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_closed_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "issue_components": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "issue_creator_uri": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_defect_target": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_description": {
+            "type": "string"
+          },
+          "issue_feature": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_filed_against": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_found_in": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_id": {
+            "type": "string"
+          },
+          "issue_key": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_parent_key": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_parent_priority": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_parent_status": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_parent_types": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_planned_for": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_priority": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_reporter_uri": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_resolution": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_resolved_types": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_severity": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_source_type": {
+            "type": "string"
+          },
+          "issue_source_uri": {
+            "type": "string"
+          },
+          "issue_status": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_subfeature": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_summary": {
+            "type": "string"
+          },
+          "issue_tags": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_types": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "issue_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "issue_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "issue_versions": {
+            "type": "string"
+          },
+          "pull_request_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "commit_defect_prediction": {
+         
+        "properties": {
+          "DefectiveCommit": {
+            "type": "long"
+          },
+          "action": {
+            "type": "string"
+          },
+          "commit_id": {
+            "type": "string"
+          },
+          "commit_message": {
+            "type": "string"
+          },
+          "feature_to_point": {
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "value": {
+                "type": "double"
+              }
+            }
+          },
+          "leaf": {
+            "type": "string"
+          },
+          "odds": {
+            "type": "double"
+          },
+          "point": {
+            "type": "double"
+          },
+          "prediction": {
+            "type": "double"
+          },
+          "probability": {
+            "type": "double"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "truth": {
+            "type": "long"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "pull": {
+         
+        "properties": {
+          "pull_closed_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "pull_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "pull_merged_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "pull_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "pull_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "branch": {
+         
+        "properties": {
+          "branch_commit_uri": {
+            "type": "string"
+          },
+          "branch_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "branch_name": {
+            "type": "string"
+          },
+          "branch_source_type": {
+            "type": "string"
+          },
+          "branch_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "build": {
+         
+        "properties": {
+          "build_timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "build_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "committed_file": {
+         
+        "properties": {
+          "commit_author_commit_count": {
+            "type": "long"
+          },
+          "commit_author_company": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_email": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_follower_count": {
+            "type": "long"
+          },
+          "commit_author_following_count": {
+            "type": "long"
+          },
+          "commit_author_id": {
+            "type": "string"
+          },
+          "commit_author_key": {
+            "type": "string"
+          },
+          "commit_author_login": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_name": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_public_gist_count": {
+            "type": "long"
+          },
+          "commit_author_public_repo_count": {
+            "type": "long"
+          },
+          "commit_author_source_type": {
+            "type": "string"
+          },
+          "commit_author_source_uri": {
+            "type": "string"
+          },
+          "commit_author_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_uri": {
+            "type": "string"
+          },
+          "commit_branch_name": {
+            "type": "string"
+          },
+          "commit_committer_commit_count": {
+            "type": "long"
+          },
+          "commit_committer_company": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_email": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_follower_count": {
+            "type": "long"
+          },
+          "commit_committer_following_count": {
+            "type": "long"
+          },
+          "commit_committer_id": {
+            "type": "string"
+          },
+          "commit_committer_key": {
+            "type": "string"
+          },
+          "commit_committer_login": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_name": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_public_gist_count": {
+            "type": "long"
+          },
+          "commit_committer_public_repo_count": {
+            "type": "long"
+          },
+          "commit_committer_source_type": {
+            "type": "string"
+          },
+          "commit_committer_source_uri": {
+            "type": "string"
+          },
+          "commit_committer_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_uri": {
+            "type": "string"
+          },
+          "commit_id": {
+            "type": "string"
+          },
+          "commit_issue_keys": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_issues": {
+            "properties": {
+              "issue_assignee_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_closed_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_components": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_created_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_creator_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_defect_target": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_description": {
+                "type": "string"
+              },
+              "issue_feature": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_filed_against": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_found_in": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_id": {
+                "type": "string"
+              },
+              "issue_key": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_key": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_priority": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_status": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_planned_for": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_priority": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_reporter_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_resolution": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_resolved_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_severity": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_source_type": {
+                "type": "string"
+              },
+              "issue_source_uri": {
+                "type": "string"
+              },
+              "issue_status": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_subfeature": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_summary": {
+                "type": "string"
+              },
+              "issue_tags": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_updated_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_uri": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "issue_versions": {
+                "type": "string"
+              },
+              "pull_request_uri": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "timestamp": {
+                "type": "long"
+              }
+            }
+          },
+          "commit_message": {
+            "type": "string"
+          },
+          "commit_source_type": {
+            "type": "string"
+          },
+          "commit_source_uri": {
+            "type": "string"
+          },
+          "commit_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "file_action": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "file_added_line_count": {
+            "type": "long"
+          },
+          "file_author_changed_line_count": {
+            "type": "long"
+          },
+          "file_author_commit_count": {
+            "type": "long"
+          },
+          "file_changed_line_count": {
+            "type": "long"
+          },
+          "file_changes": {
+            "properties": {
+              "change_introduced_commit": {
+                "type": "string"
+              },
+              "change_line": {
+                "type": "string"
+              },
+              "change_line_number": {
+                "type": "long"
+              },
+              "change_previous_line_number": {
+                "type": "long"
+              },
+              "change_type": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              }
+            }
+          },
+          "file_committer_changed_line_count": {
+            "type": "long"
+          },
+          "file_committer_commit_count": {
+            "type": "long"
+          },
+          "file_deleted_line_count": {
+            "type": "long"
+          },
+          "file_id": {
+            "type": "string"
+          },
+          "file_key": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "file_line_count": {
+            "type": "long"
+          },
+          "file_path": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            },
+            "analyzer": "pathname_analyzer",
+            "search_analyzer": "keyword"
+          },
+          "file_previous_path": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            },
+            "analyzer": "pathname_analyzer",
+            "search_analyzer": "keyword"
+          },
+          "file_size": {
+            "type": "long"
+          },
+          "file_total_changed_line_count": {
+            "type": "long"
+          },
+          "file_total_commit_count": {
+            "type": "long"
+          },
+          "file_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "sequence_no": {
+            "type": "long"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "file_issue_prediction": {
+         
+        "properties": {
+          "file_path": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            },
+            "analyzer": "pathname_analyzer",
+            "search_analyzer": "keyword"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "commit": {
+         
+        "properties": {
+          "commit_author_commit_count": {
+            "type": "long"
+          },
+          "commit_author_company": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_email": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_follower_count": {
+            "type": "long"
+          },
+          "commit_author_following_count": {
+            "type": "long"
+          },
+          "commit_author_id": {
+            "type": "string"
+          },
+          "commit_author_key": {
+            "type": "string"
+          },
+          "commit_author_login": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_name": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_public_gist_count": {
+            "type": "long"
+          },
+          "commit_author_public_repo_count": {
+            "type": "long"
+          },
+          "commit_author_source_type": {
+            "type": "string"
+          },
+          "commit_author_source_uri": {
+            "type": "string"
+          },
+          "commit_author_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_author_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_author_uri": {
+            "type": "string"
+          },
+          "commit_branch_name": {
+            "type": "string"
+          },
+          "commit_committer_commit_count": {
+            "type": "long"
+          },
+          "commit_committer_company": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_email": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_follower_count": {
+            "type": "long"
+          },
+          "commit_committer_following_count": {
+            "type": "long"
+          },
+          "commit_committer_id": {
+            "type": "string"
+          },
+          "commit_committer_key": {
+            "type": "string"
+          },
+          "commit_committer_login": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_name": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_public_gist_count": {
+            "type": "long"
+          },
+          "commit_committer_public_repo_count": {
+            "type": "long"
+          },
+          "commit_committer_source_type": {
+            "type": "string"
+          },
+          "commit_committer_source_uri": {
+            "type": "string"
+          },
+          "commit_committer_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_committer_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "commit_committer_uri": {
+            "type": "string"
+          },
+          "commit_id": {
+            "type": "string"
+          },
+          "commit_issue_keys": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "commit_issues": {
+            "properties": {
+              "issue_assignee_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_closed_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_components": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_created_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_creator_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_defect_target": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_description": {
+                "type": "string"
+              },
+              "issue_feature": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_filed_against": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_found_in": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_id": {
+                "type": "string"
+              },
+              "issue_key": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_key": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_priority": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_status": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_parent_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_planned_for": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_priority": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_reporter_uri": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_resolution": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_resolved_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_severity": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_source_type": {
+                "type": "string"
+              },
+              "issue_source_uri": {
+                "type": "string"
+              },
+              "issue_status": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_subfeature": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_summary": {
+                "type": "string"
+              },
+              "issue_tags": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_types": {
+                "type": "string",
+                "fields": {
+                  "raw": {
+                    "type": "string",
+                    "index": "not_analyzed"
+                  }
+                }
+              },
+              "issue_updated_time": {
+                "type": "date",
+                "format": "strict_date_optional_time||epoch_millis"
+              },
+              "issue_uri": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "issue_versions": {
+                "type": "string"
+              },
+              "pull_request_uri": {
+                "type": "string",
+                "index": "not_analyzed"
+              },
+              "timestamp": {
+                "type": "long"
+              }
+            }
+          },
+          "commit_message": {
+            "type": "string"
+          },
+          "commit_source_type": {
+            "type": "string"
+          },
+          "commit_source_uri": {
+            "type": "string"
+          },
+          "commit_uri": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "sequence_no": {
+            "type": "long"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          }
+        }
+      },
+      "graph": {
+         
+        "properties": {
+          "commit_id": {
+            "type": "string"
+          },
+          "commit_source_uri": {
+            "type": "string"
+          },
+          "count": {
+            "type": "long"
+          },
+          "file_key": {
+            "type": "string",
+            "index": "not_analyzed"
+          },
+          "file_path": {
+            "type": "string",
+            "analyzer": "pathname_analyzer",
+            "search_analyzer": "keyword"
+          },
+          "from_author": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "from_commit_id": {
+            "type": "string"
+          },
+          "from_commit_timestamp": {
+            "type": "long"
+          },
+          "issue_component": {
+            "type": "string"
+          },          
+          "issue_ids": {
+            "type": "string"
+          },
+          "issue_priority": {
+            "type": "string"
+          },          
+          "issue_tags": {
+            "type": "string"
+          },
+          "issue_types": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "to_author": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          }
+        }
+      },
+      "user": {
+         
+        "properties": {
+          "timestamp": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "user_company": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "user_created_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "user_email": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "user_follower_count": {
+            "type": "long"
+          },
+          "user_following_count": {
+            "type": "long"
+          },
+          "user_id": {
+            "type": "string"
+          },
+          "user_key": {
+            "type": "string"
+          },
+          "user_login": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "user_name": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "user_public_gist_count": {
+            "type": "long"
+          },
+          "user_public_repo_count": {
+            "type": "long"
+          },
+          "user_source_type": {
+            "type": "string"
+          },
+          "user_source_uri": {
+            "type": "string"
+          },
+          "user_type": {
+            "type": "string",
+            "fields": {
+              "raw": {
+                "type": "string",
+                "index": "not_analyzed"
+              }
+            }
+          },
+          "user_updated_time": {
+            "type": "date",
+            "format": "strict_date_optional_time||epoch_millis"
+          },
+          "user_uri": {
+            "type": "string"
+          }
+        }
+      }
+  },
+  "settings": {     
+    "analysis": {
+      "analyzer": {
+        "package_analyzer": {
+          "tokenizer": "package_tokenizer",
+          "type": "custom"
+        },
+        "pathname_analyzer": {
+          "tokenizer": "pathname_tokenizer",
+          "type": "custom"
+        }
+      },
+      "tokenizer": {
+        "package_tokenizer": {
+          "delimiter": ".",
+          "type": "path_hierarchy"
+        },
+        "pathname_tokenizer": {
+          "delimiter": "/",
+          "type": "path_hierarchy"
+        }
+      }
+    }
+  }   
+}

@@ -1,0 +1,1398 @@
+---
+swagger: "2.0"
+info:
+  description: "DevOps Data Mining, Analysis and Insights API"
+  version: "1.0.0"
+  title: "The DevOps Insights API"
+host: "localhost:8080"
+basePath: "/v1"
+schemes:
+- "http"
+- "https"
+produces:
+- "application/json"
+paths:
+  /config:
+    get:
+      tags:
+      - "config"
+      summary: "Return the server configuration."
+      description: "Return the server configuration."
+      operationId: "controllers.default_controller.get_config"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "The server config as a set of key/value pairs"
+          schema:
+            type: "object"
+            properties: {}
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "config"
+  /scan:
+    get:
+      tags:
+      - "scan"
+      summary: "Return the scan auth file content."
+      description: "Return the scan auth html file content."
+      operationId: "controllers.default_controller.scan"
+      produces:
+      - "text/html"
+      parameters: []
+      responses:
+        200:
+          description: "Return the scan auth html file content"
+        404:
+          description: "Scan auth file not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "scan"
+  /ci_server:
+    post:
+      tags:
+      - "ci_server"
+      summary: "Handles Pull Request Creations"
+      description: "Handles github events for both open and update Pull Requests sent by webhook events. Only set the status to pending and notifies RUDI to interrupt the streamer. RUDI Streamer does the rest."
+      operationId: "controllers.default_controller.ci_server"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "toolchainId"
+        in: "query"
+        description: "Project Toolchain ID"
+        required: false
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "PR event data that needs to be processed"
+        required: false
+        schema:
+          $ref: "#/definitions/PostCIRequest"
+      responses:
+        202:
+          description: "PR accepted and being processed"
+          schema:
+            $ref: "#/definitions/OutPullRequest"
+        400:
+          description: "Invalid event post"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "ci_server"
+  /healthcheck:
+    get:
+      tags:
+      - "healthcheck"
+      summary: "Return the JSON structure that indicates health of this service and dependencies"
+      description: "Return the JSON structure that indicates health of this service and dependencies"
+      operationId: "controllers.default_controller.healthcheck"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        200:
+          description: "Return the health is OK"
+        404:
+          description: "Health is NOT_OK"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "healthcheck"
+  /projects:
+    get:
+      tags:
+      - "project"
+      summary: "Returns a list of projects"
+      description: "Returns a list of projects"
+      operationId: "controllers.default_controller.list_projects"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Project's name"
+        required: false
+        type: "string"
+      - name: "id"
+        in: "query"
+        description: "Project's id"
+        required: false
+        type: "string"
+      - name: "state"
+        in: "query"
+        description: "Project's state"
+        required: false
+        type: "string"
+        enum:
+        - "all"
+        - "waiting"
+        - "ready"
+        - "running"
+        - "successful"
+        - "failed"
+        - "permanently_failed"
+        - "stopped"
+      - name: "completed"
+        in: "query"
+        description: "Project's completion state"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "An array of project summaries"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OutProject"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+    post:
+      tags:
+      - "project"
+      summary: "Adds a new project"
+      description: "Adds a new project"
+      operationId: "controllers.default_controller.add_project"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Project object that needs to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/InProject"
+      responses:
+        202:
+          description: "Project addition accepted"
+          schema:
+            $ref: "#/definitions/OutProject"
+        400:
+          description: "Invalid input"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+  /metrics:
+    get:
+      tags:
+      - "metric"
+      summary: "Returns a list of metrics"
+      description: "Returns a list of metrics"
+      operationId: "controllers.default_controller.list_metrics"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "Project's name"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "An array of project summaries"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/OutProject"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "metrics"
+  /metrics/{project_name}:
+    get:
+      tags:
+      - "metric"
+      summary: "Returns a single metric"
+      description: "Returns the metric by the specified name"
+      operationId: "controllers.default_controller.get_metric"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        description: "Project's name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A project object"
+          schema:
+            $ref: "#/definitions/OutProject"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "metric"
+  /projects/{project_name}:
+    get:
+      tags:
+      - "project"
+      summary: "Returns a single project"
+      description: "Returns the project by the specified name"
+      operationId: "controllers.default_controller.get_project"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        description: "Project's name"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A project object"
+          schema:
+            $ref: "#/definitions/OutProject"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+    put:
+      tags:
+      - "project"
+      summary: "Updates a project"
+      description: "Updates a project with a modified version"
+      operationId: "controllers.default_controller.update_project"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        description: "Project's name"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Modified version of the project object"
+        required: true
+        schema:
+          $ref: "#/definitions/InProjectSources"
+      responses:
+        202:
+          description: "Project update accepted"
+          schema:
+            $ref: "#/definitions/OutProject"
+        400:
+          description: "Invalid input"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+    delete:
+      tags:
+      - "project"
+      summary: "Deletes an project"
+      description: "Deletes the project by the specified name"
+      operationId: "controllers.default_controller.delete_project"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        description: "Project's name"
+        required: true
+        type: "string"
+      responses:
+        202:
+          description: "Project deletion accepted"
+          schema:
+            $ref: "#/definitions/OutProject"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+    patch:
+      tags:
+      - "project"
+      summary: "Applies a set of changes to a project"
+      description: "Applies a set of changes to a project"
+      operationId: "controllers.default_controller.patch_project"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        description: "Project's name"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Changes that needs to be applied"
+        required: true
+        schema:
+          $ref: "#/definitions/body"
+      responses:
+        202:
+          description: "Project patch accepted"
+          schema:
+            $ref: "#/definitions/OutProject"
+        400:
+          description: "Invalid input"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "project"
+  /projects/{project_name}/query:
+    get:
+      tags:
+      - "query"
+      summary: "Returns project's resources"
+      description: "Returns project's resources"
+      operationId: "controllers.default_controller.query_project_resources"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "resource_type"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "where"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+        format: "int32"
+      - name: "sort_by"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "sort_order"
+        in: "query"
+        required: false
+        type: "string"
+        enum:
+        - "asc"
+        - "desc"
+      - name: "start"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+      - name: "fields"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "min_probability"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Report's distribution data"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "query"
+  /projects/{project_name}/reports/best_practices/{name}/distribution:
+    get:
+      tags:
+      - "report"
+      summary: "Returns best practice distributions on project's resources"
+      description: "Returns best practice distributions on project's resources"
+      operationId: "controllers.default_controller.get_project_best_practice_distribution"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Best practice results"
+          schema:
+            $ref: "#/definitions/inline_response_200"
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+  /projects/{project_name}/reports/best_practices/{name}/time_series:
+    get:
+      tags:
+      - "report"
+      summary: "Returns best practice time series on project's resources"
+      description: "Returns best practice time series on project's resources"
+      operationId: "controllers.default_controller.get_project_best_practice_time_series"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "interval"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "time_format"
+        in: "query"
+        required: false
+        type: "string"
+        enum:
+        - "iso-8601"
+        - "unix-millis"
+      responses:
+        200:
+          description: "Best practice results"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+  /projects/{project_name}/reports/distribution/freeform:
+    post:
+      tags:
+      - "report"
+      summary: "Returns aggregated results of project's queries using a whole query approach"
+      description: "Returns aggregated results of project's queries using a whole query approach"
+      operationId: "controllers.default_controller.get_project_resource_distribution_ex_freeform"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "aggregations"
+        description: "Aggregations descriptor"
+        required: true
+        schema:
+          type: "object"
+          properties: {}
+      - name: "resource_type"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "query"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Report's distribution data"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+  /projects/{project_name}/reports/distribution:
+    get:
+      tags:
+      - "report"
+      summary: "Returns distributions of project's resources"
+      description: "Returns distributions of project's resources"
+      operationId: "controllers.default_controller.get_project_resource_distribution"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "resource_type"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "group_by_field"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "sum_by_field"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "min_probability"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Report's distribution data"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+    post:
+      tags:
+      - "report"
+      summary: "Returns aggregated results of project's queries"
+      description: "Returns aggregated resuts of project's queries"
+      operationId: "controllers.default_controller.get_project_resource_distribution_ex"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "aggregations"
+        description: "Aggregations descriptor"
+        required: true
+        schema:
+          type: "object"
+          properties: {}
+      - name: "resource_type"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "query"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "min_probability"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Report's distribution data"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+  /projects/{project_name}/reports/time_series/freeform:
+        post:
+          tags:
+          - "report"
+          summary: "Returns time series of aggregated results of project's queries using a whole query approach"
+          description: "Returns time series of aggregated resuts of project's queries using a whole query approach"
+          operationId: "controllers.default_controller.get_project_resource_time_series_ex_freeform"
+          consumes:
+          - "application/json"
+          produces:
+          - "application/json"
+          parameters:
+          - name: "project_name"
+            in: "path"
+            required: true
+            type: "string"
+          - in: "body"
+            name: "aggregations"
+            description: "Aggregations descriptor"
+            required: true
+            schema:
+              type: "object"
+              properties: {}
+          - name: "resource_type"
+            in: "query"
+            required: false
+            type: "string"
+          - name: "time_format"
+            in: "query"
+            required: false
+            type: "string"
+            enum:
+            - "iso-8601"
+            - "unix-millis"
+          - name: "query"
+            in: "query"
+            required: false
+            type: "string"
+          responses:
+            200:
+              description: "Report's distribution data"
+              schema:
+                type: "object"
+                properties: {}
+            404:
+              description: "Project not found"
+            default:
+              description: "Unexpected error"
+              schema:
+                $ref: "#/definitions/Error"
+          x-tags:
+          - tag: "report"
+  /projects/{project_name}/freeform:
+        post:
+          tags:
+          - "report"
+          summary: "Freeform approach to querying"
+          description: "Returns results of project's queries using a whole query approach"
+          operationId: "controllers.default_controller.get_project_freeform"
+          consumes:
+          - "application/json"
+          produces:
+          - "application/json"
+          parameters:
+          - name: "project_name"
+            in: "path"
+            required: true
+            type: "string"
+          - name: "query"
+            in: "query"
+            required: false
+            type: "string"
+          - name: "resource_type"
+            in: "query"
+            required: false
+            type: "string"
+
+          responses:
+            200:
+              description: "Report's distribution data"
+              schema:
+                type: "object"
+                properties: {}
+            404:
+              description: "Project not found"
+            default:
+              description: "Unexpected error"
+              schema:
+                $ref: "#/definitions/Error"
+          x-tags:
+          - tag: "report"
+  /projects/{project_name}/reports/time_series:
+    get:
+      tags:
+      - "report"
+      summary: "Returns time series of project's resources"
+      description: "Returns time series of project's resources"
+      operationId: "controllers.default_controller.get_project_resource_time_series"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - name: "resource_type"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "group_by_field"
+        in: "query"
+        required: true
+        type: "string"
+      - name: "sum_by_field"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "interval"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "time_format"
+        in: "query"
+        required: false
+        type: "string"
+        enum:
+        - "iso-8601"
+        - "unix-millis"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "Report's time series data"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+    post:
+      tags:
+      - "report"
+      summary: "Returns time series of aggregated results of project's queries"
+      description: "Returns time series of aggregated resuts of project's queries"
+      operationId: "controllers.default_controller.get_project_resource_time_series_ex"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "project_name"
+        in: "path"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "aggregations"
+        description: "Aggregations descriptor"
+        required: true
+        schema:
+          type: "object"
+          properties: {}
+      - name: "resource_type"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "interval"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "time_format"
+        in: "query"
+        required: false
+        type: "string"
+        enum:
+        - "iso-8601"
+        - "unix-millis"
+      - name: "query"
+        in: "query"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "Report's distribution data"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Project not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "report"
+  /scheduler:
+    get:
+      tags:
+      - "scheduler"
+      summary: "Returns the scheduler internal state."
+      description: "Returns the scheduler internal state."
+      operationId: "controllers.default_controller.get_scheduler"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "The scheduler internal state"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Scheduler state not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "scheduler"
+  /workers:
+    get:
+      tags:
+      - "worker"
+      summary: "Returns a list of currently active workers."
+      description: "Returns a list of currently active workers."
+      operationId: "controllers.default_controller.list_workers"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "state"
+          in: "query"
+          description: "Worker's state"
+          required: false
+          type: "string"
+          enum:
+            - "all"
+            - "joined"
+            - "left"
+            - "dead"
+      responses:
+        200:
+          description: "An array of workers"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties: {}
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "worker"
+  /workers/{worker_id}:
+    get:
+      tags:
+      - "worker"
+      summary: "Returns information about a worker"
+      description: "Retrieve information about a worker"
+      operationId: "controllers.default_controller.get_worker"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "worker_id"
+        in: "path"
+        description: "Workers's id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "A worker object"
+          schema:
+            type: "object"
+            properties: {}
+        404:
+          description: "Worker not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "worker"
+    patch:
+      tags:
+      - "worker"
+      summary: "Applies a set of changes to a worker"
+      description: "Applies a set of changes to a worker"
+      operationId: "controllers.default_controller.patch_worker"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "worker_id"
+        in: "path"
+        description: "Worker id"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Changes that needs to be applied"
+        required: true
+        schema:
+          $ref: "#/definitions/WorkerPatch"
+      responses:
+        202:
+          description: "Worker patch accepted"
+          schema:
+            type: "object"
+            properties: {}
+        400:
+          description: "Invalid input"
+        404:
+          description: "Worker not found"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "worker"
+  /history:
+    get:
+      tags:
+      - "history"
+      summary: "Returns messages history"
+      description: "Returns messages history, that is messages received and sent by the scheduler"
+      operationId: "controllers.default_controller.get_history"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "where"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "from_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "to_time"
+        in: "query"
+        required: false
+        type: "string"
+      - name: "start"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      - name: "size"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+      responses:
+        200:
+          description: "Message history"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties: {}
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "history"
+    delete:
+      tags:
+      - "history"
+      summary: "Deletes messages history"
+      description: "Deletes messages older than a given period"
+      operationId: "controllers.default_controller.delete_history"
+      parameters:
+      - name: "where"
+        in: "query"
+        required: false
+        type: "string"
+        description: "Set to a valid Lucene query if you want to selectively remove messages. Default will delete all messages older than the given period"
+      - name: "older_than_days"
+        in: "query"
+        required: false
+        type: "integer"
+        format: "int32"
+        description: "The period of time in days: e.g. older_than=15 will delete messages older than 15 days. Default will delete messages older than 7 days"
+      responses:
+        202:
+          description: "Message history deletion accepted"
+        default:
+          description: "Unexpected error"
+          schema:
+            $ref: "#/definitions/Error"
+      x-tags:
+      - tag: "history"
+securityDefinitions:
+  userSecurity:
+    type: "apiKey"
+    name: "X-Auth-Token"
+    in: "header"
+definitions:
+  PostCIRequest:
+    type: "object" 
+  PostPullRequest:
+    type: "object"
+    required:
+    - "action"
+    - "number"
+    - "pull_request"
+    - "repository"
+    - "sender"
+    properties:
+      action:
+        type: "string"
+        description: "opened"
+      number:
+        type: "integer"
+        description: "The description of this project"
+      pull_request:
+        type: object
+        description: "The data for PR"
+      repository:
+        type: object
+        description: "PR repo data"
+      sender:
+        type: object
+        description: "PR sender info"
+    description: "Pull Request payload from github"
+  OutPullRequest:
+    type: "object"
+    properties:
+      service:
+        type: "string"
+        description: "DevOpsInsights"
+      version:
+        type: "integer"
+        description: "version"
+    description: "Return Value"
+  InProjectSources:
+    type: "object"
+    required:
+    - "sources"
+    properties:
+      sources:
+        type: "array"
+        description: "The data sources of this project"
+        items:
+          $ref: "#/definitions/DataSource"
+  InProject:
+    type: "object"
+    required:
+    - "name"
+    - "sources"
+    properties:
+      name:
+        type: "string"
+        description: "The name of this project"
+      description:
+        type: "string"
+        description: "The description of this project"
+      sources:
+        type: "array"
+        description: "The data sources of this project"
+        items:
+          $ref: "#/definitions/DataSource"
+    description: "a container of pointers to related data sources to mine"
+  OutProject:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        description: "The unique identifier of this project"
+      url:
+        type: "string"
+        description: "The url of this project"
+      name:
+        type: "string"
+        description: "The name of this project"
+      description:
+        type: "string"
+        description: "The description of this project"
+      created_at:
+        type: "string"
+        description: "The time this project was created in ISO-8601 format (UTC)"
+      created_by:
+        type: "string"
+        description: "The user that created this project"
+      updated_at:
+        type: "string"
+        description: "The last time this project was updated in ISO-8601 format (UTC)"
+      updated_by:
+        type: "string"
+        description: "The last user that updated this project"
+      input:
+        type: "object"
+        description: "the input data of of this project"
+        properties: {}
+      previous_input:
+        type: "object"
+        description: "the previous input data of of this project"
+        properties: {}
+      current_method:
+        type: "string"
+        description: "The current method of this project"
+      desired_method:
+        type: "string"
+        description: "The desired method of this project"
+      current_state:
+        type: "string"
+        description: "The current state of this project"
+      desired_state:
+        type: "string"
+        description: "The desired state of this project"
+      current_stage:
+        type: "string"
+        description: "The current stage of this project"
+      last_error:
+        $ref: "#/definitions/Error"
+    description: "a container of pointers to related data sources to mine"
+    example:
+      name: "spark"
+      description: "apache spark"
+      input:
+      - sources:
+        - source_type: "github_repo"
+          api_base_url: "https://api.github.com"
+          access_token: "marameo"
+          owner: "apache"
+          name: "spark"
+          git_url: "https://github.com/apache/spark.git"
+        - source_type: "jira_project"
+          api_base_url: "https://issues.apache.org/jira"
+          key: "SPARK"
+  DataSource:
+    required:
+    - "source_type"
+    discriminator: "source_type"
+    properties:
+      source_type:
+        type: "string"
+  GitHubRepo:
+    allOf:
+    - $ref: "#/definitions/DataSource"
+    - type: "object"
+      required:
+      - "api_base_url"
+      - "git_url"
+      - "repo_name"
+      - "repo_owner"
+      properties:
+        api_base_url:
+          type: "string"
+          description: "The API base url of this repo"
+        access_token:
+          type: "string"
+          description: "The access token of this repo"
+        repo_owner:
+          type: "string"
+          description: "the owner of this repo"
+        repo_name:
+          type: "string"
+          description: "the name of this repo"
+        git_url:
+          type: "string"
+          description: "The git url of this repo"
+    description: "A GitHub repo data source"
+  BitBucketRepo:
+    allOf:
+    - $ref: "#/definitions/DataSource"
+    - type: "object"
+      required:
+      - "api_base_url"
+      - "git_url"
+      - "repo_name"
+      - "repo_owner"
+      properties:
+        api_base_url:
+          type: "string"
+          description: "The API base url of this repo"
+        access_token:
+          type: "string"
+          description: "The access token of this repo"
+        repo_owner:
+          type: "string"
+          description: "the owner of this repo"
+        repo_name:
+          type: "string"
+          description: "the name of this repo"
+        git_url:
+          type: "string"
+          description: "The git url of this repo"
+    description: "A BitBucket repo data source"
+  JiraProject:
+    allOf:
+    - $ref: "#/definitions/DataSource"
+    - type: "object"
+      required:
+      - "api_base_url"
+      - "project_key"
+      properties:
+        api_base_url:
+          type: "string"
+          description: "The API base url of this project"
+        username:
+          type: "string"
+          description: "The user name to access this project"
+        password:
+          type: "string"
+          description: "The user's password to access this project"
+        project_key:
+          type: "string"
+          description: "the key of this project"
+    description: "A JIRA project data source"
+  RtcProject:
+    allOf:
+    - $ref: "#/definitions/DataSource"
+    - type: "object"
+      required:
+      - "api_base_url"
+      - "password"
+      - "project_title"
+      - "username"
+      properties:
+        api_base_url:
+          type: "string"
+          description: "The API base url of this data source"
+        username:
+          type: "string"
+          description: "The user name to access this data source"
+        password:
+          type: "string"
+          description: "The user's password to access this data source"
+        project_title:
+          type: "string"
+          description: "the title of this project"
+    description: "A RTC project"
+  Error:
+    type: "object"
+    properties:
+      status:
+        type: "integer"
+        format: "int32"
+      title:
+        type: "string"
+      detail:
+        type: "string"
+      ext:
+        type: "object"
+        properties: {}
+  body:
+    type: "object"
+    properties:
+      description:
+        type: "string"
+        description: "The description of this project"
+      desired_state:
+        type: "string"
+        description: "The desired state of this project"
+        enum:
+        - "stopped"
+        - "successful"
+  WorkerPatch:
+    type: "object"
+    properties:
+      quiescent:
+        type: "boolean"
+        description: "Whether the worker must be in quiescent state or not"
+  inline_response_200:
+    properties:
+      data:
+        type: "object"
+        properties: {}

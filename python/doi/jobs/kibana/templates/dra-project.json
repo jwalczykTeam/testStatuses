@@ -1,0 +1,174 @@
+[
+  {
+    "_id": "__index__",
+    "_type": "project",
+    "_source": {
+      "title": "__title__",
+      "version": 1,
+      "index": "__index__",
+      "checks": [
+        {
+          "name": "bad-issues",
+          "title": "Not Tagged Issues",
+          "queries": [
+            {
+              "name": "bad_issues",
+              "index": "__index__",
+              "q": {
+                "size": 0,
+                "query": {
+                  "query_string": {
+                    "query": "_type: issue"
+                  }
+                },
+                "aggs": {
+                  "sources": {
+                    "terms": {
+                      "field": "issue_source_type",
+                      "size": 100000
+                    },
+                    "aggs": {
+                      "no_tags": {
+                        "missing": {
+                          "field": "issue_tags.raw"
+                        }
+                      },
+                      "no_types": {
+                        "missing": {
+                          "field": "issue_types.raw"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "check": "function() { var ok = true; var bad_issues_threshold = this.bad_issues_threshold = 10; this.sources = this.bad_issues.aggregations.sources.buckets.map(function(x) { var elem = {name: x.key, bad_issues_percentage: 0, ok: true}; if ( x.key==='github') { elem.bad_issues_percentage = Math.round((x.no_tags.doc_count / x.doc_count)*100); } else { elem.bad_issues_percentage = Math.round((x.no_types.doc_count / x.doc_count)*100); } if ( elem.bad_issues_percentage > bad_issues_threshold ) { elem.ok = false; } if ( ok ) { ok = elem.ok; } return elem; }); return ok; }",
+          "on_fail": "{{#sources}}{{^ok}}**Over {{bad_issues_threshold}}% of the {{name}} issues ({{bad_issues_percentage}}%) are not tagged**. {{/ok}}{{#ok}}{{#bad_issues_percentage}}A small percentage of {{name}} issues are not tagged ({{bad_issues_percentage}}%). {{/bad_issues_percentage}}{{^bad_issues_percentage}}Nice job, all {{name}} issues are tagged. {{/bad_issues_percentage}}{{/ok}}{{/sources}}  Check the dashboard [__title__ Issues](/app/kibana#/dashboard/__index__-issues), which should contain few or no data at all.",
+          "on_pass": "You are doing well, {{#sources}}a small percentage of {{name}} issues are not tagged ({{bad_issues_percentage}}%). {{/sources}}"
+        },
+        {
+          "name": "bugs-vs-features",
+          "title": "Bugs vs Features",
+          "queries": [
+            {
+              "name": "types",
+              "index": "__index__",
+              "q": {
+                "size": 0,
+                "query": {
+                  "query_string": {
+                    "query": "_type: issue"
+                  }
+                },
+                "aggs": {
+                  "all": {
+                    "terms": {
+                      "field": "issue_types.raw",
+                      "size": 100000
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "check": "function() { this.bugs = this.types.aggregations.all.buckets.filter(function(x) { return x.key.match(/defect|bug/i)!==null; }).reduce(function(pre, cur) { return {doc_count: cur.doc_count + pre.doc_count}; }, {doc_count: 0}).doc_count; this.new_features = this.types.aggregations.all.buckets.filter(function(x) {return x.key.match(/enhancement|improvement|story|epic|task/i)!==null; }).reduce(function(pre, cur) { return { doc_count: cur.doc_count + pre.doc_count}; }, {doc_count: 0}).doc_count; this.bugs_percentage = Math.round((this.bugs / this.types.hits.total)*100); this.new_features_percentage = Math.round((this.new_features / this.types.hits.total)*100); return !(this.bugs_percentage > 10*this.new_features_percentage); }",
+          "on_fail": "You are mostly working on bugs. The percentage of bugs ({{bugs_percentage}}%) is more than 5 times the percentage of new features ({{new_features_percentage}}%).",
+          "on_pass": "You are doing well, there is a good balance between bugs and new features: {{bugs_percentage}}% vs {{new_features_percentage}}%."
+        },
+        {
+          "name": "hero-project",
+          "title": "Hero Project",
+          "queries": [
+            {
+              "name": "heros",
+              "index": "__index__",
+              "q": {
+                "size": 0,
+                "query": {
+                  "query_string": {
+                    "query": "_type: committed_file"
+                  }
+                },
+                "aggs": {
+                  "top5": {
+                    "terms": {
+                      "field": "commit_author_name.raw",
+                      "size": 5
+                    }
+                  },
+                  "all": {
+                    "terms": {
+                      "field": "commit_author_name.raw",
+                      "size": 500000
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "check": "function() { this.top5_work = Math.round((1 - this.heros.aggregations.top5.sum_other_doc_count / this.heros.hits.total)*100); this.all = this.heros.aggregations.all.buckets.length; return !(this.top5_work > 40 && this.all>50); }",
+          "on_fail": "A high percentage of the work ({{top5_work}}%) is done by 5 over {{all}} developers. This seems to be a sort of `hero project`. Check [the code interactions](/app/kibana#/dashboard/__index__-social-coding).",
+          "on_pass": "You are doing well, there is a fair distribution of work among developers."
+        },
+        {
+          "name": "bad-commits",
+          "title": "Untracked Code",
+          "queries": [
+            {
+              "name": "bad_commits",
+              "index": "__index__",
+              "q": {
+                "size": 0,
+                "query": {
+                  "query_string": {
+                    "query": "_type: commit"
+                  }
+                },
+                "aggs": {
+                  "commits_without_an_issue": {
+                    "missing": {
+                      "field": "commit_issues.issue_id"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "check": "function() { this.bad_commits_threshold = 10; this.bad_commits_percentage = Math.round((this.bad_commits.aggregations.commits_without_an_issue.doc_count / this.bad_commits.hits.total)*100); this.no_commits = (this.bad_commits.hits.total==0); return !(this.bad_commits_percentage > this.bad_commits_threshold || this.no_commits); }",
+          "on_fail": "{{#no_commits}}No commits found.{{/no_commits}}{{^no_commits}}Over {{bad_commits_threshold}}% of the commits ({{bad_commits_percentage}}%) do not reference an issue. Untracked code is being pushed to the branches.{{/no_commits}} You should expect that the dashboard [__title__ File Changes](/app/kibana#/dashboard/__index__-file-changes) will show few data.",
+          "on_pass": "You are doing well, there is a small percentage of commits ({{bad_commits_percentage}}%) not referencing an issue."
+        },
+        {
+          "name": "bad-files",
+          "title": "Defective Files",
+          "queries": [
+            {
+              "name": "q",
+              "index": "__index__",
+              "q": {
+                "size": 0,
+                "query": {
+                  "query_string": {
+                    "query": "_type: file_defect_prediction"
+                  }
+                },
+                "aggs": {
+                  "predictions": {
+                    "terms": {
+                      "field": "prediction"
+                    }
+                  }
+                }
+              }
+            }
+          ],
+          "check": "function() { this.bad_files_threshold = 10; var buckets = this.q.aggregations.predictions.buckets; this.no_predictions = buckets.length==0; if ( !this.no_predictions ) { this.bad_files = this.good_files = 0; if (typeof buckets[0] !== 'undefined') { if ( buckets[0].key == 0 ) this.good_files = buckets[0].doc_count; else this.bad_files = buckets[0].doc_count; if (typeof buckets[1] !== 'undefined') { if ( buckets[1].key == 0 ) this.good_files = buckets[1].doc_count; else this.bad_files = buckets[1].doc_count; } } this.bad_files_percentage = Math.round((this.bad_files / this.q.hits.total)*100); return !(this.bad_files_percentage > this.bad_files_threshold); } else { return false; } }",
+          "on_fail": "{{#no_predictions}} No file defect predictions available.  {{/no_predictions}} {{^no_predictions}} Over {{bad_files_threshold}}% of the files ({{bad_files_percentage}}%) are classified as `defective`, which means that they have a high probability of being defective. Check the [__title__ Predicted Defective Files](/app/kibana#/dashboard/__index__-predicted-defective-files) dashboard.{{/no_predictions}}",
+          "on_pass": "You are doing well, there is a small percentage ({{bad_files_percentage}}%) of `defective` files, those with a high probability of being buggy."
+        }
+      ]
+    }
+  }
+]

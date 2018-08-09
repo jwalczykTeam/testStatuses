@@ -1,0 +1,273 @@
+{
+  "mappings": {
+    "job": {
+      "properties": {
+        "completed": {
+          "type": "boolean"
+        },
+        "created_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "current_method": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "current_rev": {
+          "type": "long"
+        },
+        "current_stage": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "current_state": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "description": {
+          "fields": {
+            "raw": {
+              "index": "not_analyzed",
+              "type": "string"
+            }
+          },
+          "type": "string"
+        },
+        "desired_method": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "desired_rev": {
+          "type": "long"
+        },
+        "desired_state": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "ended_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "full_name": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "job_type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "last_control_msg_sent": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "name": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "started_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "stop_requested": {
+          "type": "boolean"
+        },
+        "tasks": {
+          "properties": {
+            "completed": {
+              "type": "boolean"
+            },
+            "condition": {
+              "properties": {
+                "depends_on_tasks": {
+                  "type": "string",
+                  "index": "not_analyzed"
+                }
+              }
+            },
+            "current_state": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "ended_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "function": {
+              "fields": {
+                "raw": {
+                  "index": "not_analyzed",
+                  "type": "string"
+                }
+              },
+              "type": "string"
+            },
+            "id": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "last_msg_received": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "last_msg_received_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "last_msg_sent": {
+              "type": "string",
+              "index": "not_analyzed"
+            },
+            "last_msg_sent_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "max_retry_count": {
+              "type": "long"
+            },
+            "retry_count": {
+              "type": "long"
+            },
+            "started_at": {
+              "type": "date",
+              "format": "strict_date_optional_time||epoch_millis"
+            },
+            "worker_id": {
+              "type": "string",
+              "index": "not_analyzed"
+            }
+          }
+        },
+        "tenant_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "updated_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "url": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "worker_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    },
+    "worker": {
+      "properties": {
+        "created_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "last_heartbeat_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "last_msg_received": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "last_msg_received_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "last_msg_sent": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "last_msg_sent_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "max_running_task_count": {
+          "type": "long"
+        },
+        "process_cpu": {
+          "type": "long"
+        },
+        "process_mem": {
+          "type": "long"
+        },
+        "running_task_count": {
+          "type": "long"
+        },
+        "running_task_ids": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "state": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "swap_mem": {
+          "type": "long"
+        },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "updated_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "virtual_mem": {
+          "type": "long"
+        }
+      }
+    },
+    "history": {
+      "properties": {
+        "job_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "job_name": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "method": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "started_at": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "state": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "task_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "timestamp": {
+          "type": "date",
+          "format": "strict_date_optional_time||epoch_millis"
+        },
+        "type": {
+          "type": "string",
+          "index": "not_analyzed"
+        },
+        "worker_id": {
+          "type": "string",
+          "index": "not_analyzed"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "local": {
+    "group_name": "mkrudele",
+    "work_dir": "/tmp/astro",
+    "api_key": "barabba",
+    "tear_down": { "run": true, "clear": false, "reset": false }
+  },
+  "remote": {
+    "work_dir": "/tmp/astro",
+    "api_key": "${astro_api_token}",
+    "api_ep": "${astro_api_url}",
+    "image_name": "astro",
+    "setup": { "build": false, "deploy": false },
+    "tear_down": { "run": false, "clear": false, "reset": false },
+    "containerbridge_app": "containerbridge"
+  },
+  "project_to_add": {
+    "name": "vue",
+    "description": "vue - smoke test",
+    "analyze_current_data": false,
+    "skip_mining_future_data": true,
+    "sources": [
+      {
+        "api_base_url": "https://api.github.com",
+        "git_url": "https://github.com/vuejs/vue.git", 
+        "mine_blame_info": false,
+        "labels_map": [
+          {
+            "field": "issue_types",
+            "label": "bug",
+            "value": "Defect"
+          },
+          {
+            "field": "issue_types",
+            "label": "improvement",
+            "value": "Improvement"
+          },
+          {
+            "field": "issue_types",
+            "label": "feature",
+            "value": "New Feature"
+          }
+        ],
+        "repo_name": "vue",
+        "repo_owner": "vuejs",
+        "source_type": "github_repo",
+        "access_token": "${test_token}"
+      }
+    ]
+  }
+}

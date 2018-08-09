@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+# Set to remote or local depending on where you want to run your tests:
+# on the local box, or on Bluemix.
+#
+export ASTRO_TARGET_ENV=remote
+
+# Set to the root folder of the Astro python code
+#
+export PYTHONPATH=<Astro project root folder>/python
+
+##########################################################
+# If you set ASTRO_TARGET_ENV to remote do the following:
+#
+# 1. cf login -a target-api -o org-name -s space-name
+# 2. cf ic init
+#
+# set the following env variables (that's an example,
+# you need to provide the values provided by cf ic init)
+#
+export DOCKER_HOST=tcp://containers-api.ng.bluemix.net:8443
+export DOCKER_CERT_PATH=/home/mkrudele/.ice/certs/containers-api.ng.bluemix.net/2c8ca7c6-3d35-48f0-a62f-268c054ad44a
+export DOCKER_TLS_VERIFY=1
+
+# You may need to set other env variables referenced
+# in the test config.json file
+#
+##########################################################
+
+
+##########################################################
+# If you set ASTRO_TARGET_ENV to local do the following:
+#
+# 1. cf login -a target-api -o org-name -s space-name
+# (the test can use cf login information to run tests on
+# behalf of a bluemix user)
+#
+# You may need to set other env variables referenced
+# in the test config.json file. Most important to mention
+# are the Elasticsearch and MessageHub.
+#
+# The test will attempt to use Kafka and Elasticsearch
+# install locally with default configurations (e.g.
+# http://localhost:9200 for ES). So, you don't need
+# to do anything else if you want to use local ES and
+# Kafka.
+#
+# If you want to use Elasticsearch and/or Messagehub
+# services instantiated on Bluemix, you need to set
+# the following env variables and reference in the
+# test config json file. You can get the values from
+# the service credentials (these are examples, you
+# need to get real values from Bluemix)
+#
+export TEST_MH_CONFIG='{ "messagehub": { "api_key": "bla bla bla", "kafka_admin_url": "https://kafka-admin-prod01.messagehub.services.us-south.bluemix.net:443", "kafka_brokers_sasl": [ "kafka01-prod01.messagehub.services.us-south.bluemix.net:9093", "kafka02-prod01.messagehub.services.us-south.bluemix.net:9093", "kafka03-prod01.messagehub.services.us-south.bluemix.net:9093", "kafka04-prod01.messagehub.services.us-south.bluemix.net:9093", "kafka05-prod01.messagehub.services.us-south.bluemix.net:9093" ], "kafka_rest_url": "https://kafka-rest-prod01.messagehub.services.us-south.bluemix.net:443", "mqlight_lookup_url": "https://mqlight-lookup-prod01.messagehub.services.us-south.bluemix.net/Lookup?serviceId=3c1a791d-6d8c-4d37-b9c0-3d89c6cffd22", "password": "bla bla bla", "user": "bla bla bla" } }'
+export TEST_DB_CONFIG='{ "elasticsearch": { ... }'
+
+echo Example invocations
+echo python -m unittest doi_test.test_suites.test_suite_sample.DriverCrashes
+echo python -m unittest doi_test.test_suites.test_suite_deploy

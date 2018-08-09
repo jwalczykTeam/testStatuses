@@ -1,0 +1,591 @@
+[
+  {
+    "_id": "__index__-issues-by-type-and-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issues by Type and Time",
+      "visState": "{\"title\":\"__index__ issues by type and time\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"issue_resolved_types.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-total-number-of-issues-by-type",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Total Number of Issues by Type",
+      "visState": "{\"title\":\"__index__ total number of issues by type\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"issue_resolved_types.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-top-20-contributors",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Top 20 Contributors",
+      "visState": "{\n  \"title\": \"__title__ Top 20 Contributors\",\n  \"type\": \"histogram\",\n  \"params\": {\n    \"shareYAxis\": true,\n    \"addTooltip\": true,\n    \"addLegend\": true,\n    \"scale\": \"linear\",\n    \"mode\": \"stacked\",\n    \"times\": [],\n    \"addTimeMarker\": false,\n    \"defaultYExtents\": false,\n    \"setYExtents\": false,\n    \"yAxis\": {}\n  },\n  \"aggs\": [\n    {\n      \"id\": \"3\",\n      \"type\": \"terms\",\n      \"schema\": \"segment\",\n      \"params\": {\n        \"field\": \"commit_author_name.raw\",\n        \"size\": 20,\n        \"order\": \"desc\",\n        \"orderBy\": \"2\",\n        \"customLabel\": \"Commit author\"\n      }\n    },\n    {\n      \"id\": \"2\",\n      \"type\": \"count\",\n      \"schema\": \"metric\",\n      \"params\": {\n        \"customLabel\": \"Total files committed\"\n      }\n    }\n  ],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"index\": \"__index__\",\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"_type:committed_file\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-top-20-contributing-companies",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Top 20 Contributing Companies",
+      "visState": "{\"title\":\"Garage Method Top 20 Contributing Companies\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"commit_author_company.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"2\",\"customLabel\":\"Author Company\"}},{\"id\":\"2\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Total files committed\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-total-number-of-issues-by-component",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Total Number of Issues by Component",
+      "visState": "{\"title\":\"__index__ total number of issues by component\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"issue_components.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issues-by-component-and-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issues by Component and Time",
+      "visState": "{\"title\":\"__index__ issues by component and time\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"issue_components.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-files-with-most-changes",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Files with Most Changes",
+      "visState": "{\"title\":\"__index__ files with most changes\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"file_changed_line_count\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file AND file_path.raw:(*.java *.scala *.py *.R R_pkg *.rb *.c *.cpp *.cxx *.sh *.js) AND file_action:(modif* chang*)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-files-with-most-authors-changing",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Files with Most Authors Changing",
+      "visState": "{\"title\":\"__index__ files with most authors changing\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"commit_author_name.raw\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file AND file_path.raw:(*.java *.scala *.py *.R R_pkg *.rb *.c *.cpp *.cxx *.sh *.js)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-files-with-most-bugs",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Files with Most Defects",
+      "visState": "{\"title\":\"__index__ files with most bugs\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file AND file_path.raw:(*.java *.scala *.py *.R R_pkg *.rb *.c *.cpp *.cxx *.sh *.js) AND file_action:(modif* chang*) AND commit_issues.issue_resolved_types:(bug defect)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-total-number-of-issues-by-priority",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Total Number of Issues by Priority",
+      "visState": "{\"title\":\"__index__ total number of issues by type\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"issue_priority.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issues-by-priority-and-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issues by Priority and Time",
+      "visState": "{\"title\":\"__index__ issues by component and time\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"issue_priority.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: issue\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-total-number-of-files-changed-by-component",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Total Number of Files Changed by Component",
+      "visState": "{\"title\":\"__index__ total number of files by component\",\"type\":\"pie\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"isDonut\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"commit_issues.issue_components.raw\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file AND file_path.raw:(*.java *.scala *.py *.R R_pkg *.rb *.c *.cpp *.cxx *.sh *.js)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-number-of-files-changed-by-time-and-component",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Number of Files Changed by Time and Component",
+      "visState": "{\"title\":\"__index__ number of files changed by time and component\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"group\",\"params\":{\"field\":\"commit_issues.issue_components.raw\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:committed_file AND file_path.raw:(*.java *.scala *.py *.R R_pkg *.rb *.c *.cpp *.cxx *.sh *.js)\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-file-issues-predictions",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ File Issues Predictions",
+      "visState": "{\"title\":\"__index__ issues probability\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"probability\",\"customLabel\":\"Probability of getting an issue\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"file_path.raw\",\"size\":500,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Filename\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type: file_issue_prediction\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-file-issues-predictions-inference",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ File Issues Predictions Inference",
+      "visState": "{\"title\":\"inference___index__\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_1\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":100,\"orderAgg\":{\"id\":\"2-orderAgg\",\"type\":\"sum\",\"schema\":\"orderAgg\",\"params\":{\"field\":\"probability\"}},\"order\":\"desc\",\"orderBy\":\"custom\"}},{\"id\":\"3\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_1\"}},{\"id\":\"4\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.DistinctAuthors_1\"}},{\"id\":\"5\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_2\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_exists_:probability\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-defect-probabilities",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Defect Probabilities",
+      "visState": "{\"title\":\"__index__ Defect Probabilities\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"probability\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"file_path.raw\",\"size\":500,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type: file_defect_prediction\"}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-effect-of-issue-priority",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Effect of Issue Priority",
+      "visState": "{\"title\":\"__index__ Effect of Issue Priority\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":30,\"orderAgg\":{\"id\":\"2-orderAgg\",\"type\":\"avg\",\"schema\":\"orderAgg\",\"params\":{\"field\":\"probability\"}},\"order\":\"desc\",\"orderBy\":\"custom\"}},{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_1\"}},{\"id\":\"3\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Critical_1\"}},{\"id\":\"4\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Major_1\"}},{\"id\":\"5\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Minor_1\"}},{\"id\":\"6\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Trivial_1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:file_defect_prediction\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-effect-of-previous-two-months-of-properties",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Effect of Previous Two Months of Properties",
+      "visState": "{\"title\":\"__index__ Effect of Previous Two Months of Properties\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":30,\"orderAgg\":{\"id\":\"2-orderAgg\",\"type\":\"avg\",\"schema\":\"orderAgg\",\"params\":{\"field\":\"probability\"}},\"order\":\"desc\",\"orderBy\":\"custom\"}},{\"id\":\"1\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.DistinctAuthors_1\",\"percents\":[50]}},{\"id\":\"3\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_1\",\"percents\":[50]}},{\"id\":\"4\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_1\",\"percents\":[50]}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:file_defect_prediction\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-temporal-effect-of-blocker-issues",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Temporal Effect of Blocker Issues",
+      "visState": "{\"title\":\"__index__ Temporal Effect of Blocker Issues\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":30,\"orderAgg\":{\"id\":\"2-orderAgg\",\"type\":\"avg\",\"schema\":\"orderAgg\",\"params\":{\"field\":\"probability\"}},\"order\":\"desc\",\"orderBy\":\"custom\"}},{\"id\":\"1\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_1\",\"percents\":[50]}},{\"id\":\"3\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_2\",\"percents\":[50]}},{\"id\":\"4\",\"type\":\"median\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_3\",\"percents\":[50]}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:file_defect_prediction\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-temporal-effect-of-bugs",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Temporal Effect of Bugs",
+      "visState": "{\"title\":\"__index__ Temporal Effect of Bugs\",\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_1\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"file_path.raw\",\"size\":30,\"orderAgg\":{\"id\":\"2-orderAgg\",\"type\":\"avg\",\"schema\":\"orderAgg\",\"params\":{\"field\":\"probability\"}},\"order\":\"desc\",\"orderBy\":\"custom\"}},{\"id\":\"3\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_2\"}},{\"id\":\"4\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_3\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"legendOpen\":false}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:file_defect_prediction\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-diff-effect-over-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Diff Effect Over Time",
+      "visState": "{\"title\":\"__index__ Diff Effect Over Time\",\"type\":\"line\",\"params\":{\"addLegend\":true,\"addTimeMarker\":false,\"addTooltip\":true,\"defaultYExtents\":true,\"drawLinesBetweenPoints\":true,\"interpolate\":\"linear\",\"radiusRatio\":9,\"scale\":\"linear\",\"setYExtents\":false,\"shareYAxis\":true,\"showCircles\":false,\"smoothLines\":true,\"times\":[],\"yAxis\":{}},\"aggs\":[{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"custom\",\"customInterval\":\"8w\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"5\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.MinusDiff_1\"}},{\"id\":\"6\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.PlusDiff_1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-distinct-committers-and-distinct-authors-effect-over-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Distinct Committers and Distinct Authors Effect Over Time",
+      "visState": "{\"title\":\"__index__ Distinct Committers and Distinct Authors Effect Over Time\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":true,\"setYExtents\":true,\"yAxis\":{\"min\":5500,\"max\":7500}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"custom\",\"customInterval\":\"8w\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.DistinctAuthors_1\"}},{\"id\":\"4\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.DistinctCommitters_1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issue-priority-effect-over-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issue Priority Effect Over Time",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":true,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"custom\",\"customInterval\":\"8w\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Blocker_1\"}},{\"id\":\"4\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Critical_1\"}},{\"id\":\"5\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Major_1\"}},{\"id\":\"6\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Minor_1\"}},{\"id\":\"7\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Trivial_1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issue-type-effect-over-time",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issue Type Effect Over Time",
+      "visState": "{\"title\":\"__index__ Issue Priority Effect Over Time\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":true,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"cardinality\",\"schema\":\"metric\",\"params\":{\"field\":\"file_path.raw\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"custom\",\"customInterval\":\"8w\",\"min_doc_count\":1,\"extended_bounds\":{}}},{\"id\":\"3\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Bug_1\"}},{\"id\":\"4\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Improvement_1\"}},{\"id\":\"5\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.New_Feature_1\"}},{\"id\":\"6\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Story_1\"}},{\"id\":\"7\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"inference.Sub-task_1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+    {
+    "_id": "__index__-bug-fixing-interactions",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Bug Fixing Interactions",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"draGraph\",\"params\":{\"index\":\"__index__\",\"edgeType\":\"bug_edges\",\"nodeType\":\"bug_nodes\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-code-interactions",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Code Interactions",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"draGraph\",\"params\":{},\"aggs\":[{\"id\":\"1\",\"type\":\"sum\",\"schema\":\"metric\",\"params\":{\"field\":\"count\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"from\",\"params\":{\"field\":\"from_author.raw\",\"size\":99999,\"order\":\"desc\",\"orderBy\":\"1\"}},{\"id\":\"3\",\"type\":\"terms\",\"schema\":\"to\",\"params\":{\"field\":\"to_author.raw\",\"size\":99999,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-interval",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ interval",
+      "visState": "{\"title\":\"__index__ entropy\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"interval\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-bugs",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Bugs",
+      "visState": "{\"title\":\"__index__ bugs\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:issue AND (\\\"Bug\\\" OR \\\"Defect\\\" OR \\\"bug\\\")\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-entropy",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Entropy",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"entropy\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-experience",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Experience",
+      "visState": "{\"title\":\"__index__ experience\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"lines_experience\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-interval",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Interval",
+      "visState": "{\"title\":\"__index__ entropy\",\"type\":\"line\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"showCircles\":false,\"smoothLines\":true,\"interpolate\":\"linear\",\"scale\":\"linear\",\"drawLinesBetweenPoints\":true,\"radiusRatio\":9,\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"avg\",\"schema\":\"metric\",\"params\":{\"field\":\"interval\"}},{\"id\":\"2\",\"type\":\"date_histogram\",\"schema\":\"segment\",\"params\":{\"field\":\"timestamp\",\"interval\":\"auto\",\"customInterval\":\"2h\",\"min_doc_count\":1,\"extended_bounds\":{}}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-interval-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Interval Explanation",
+      "visState": "{\"title\":\"Interval Explanation\",\"type\":\"markdown\",\"params\":{\"markdown\":\"##**Interval**\\n\\nThis metric measures the average previous commit recency. In other words, it's a measure of the interval between the latest commit a file was edited and the previous commit that file was edited.\\n\\nGenerally, lower recency is associated with a higher defect rate.\\n\\nThis visualization can also be informatively. For example, if you expect an issue to be resolved without editing long standing code this can confirmed here.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-experience-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Experience Explanation",
+      "visState": "{\"title\":\"Experience Explanation\",\"type\":\"markdown\",\"params\":{\"markdown\":\"##**Experience**\\n\\nThis metric measures the average project experience of the developers making commits. \\n\\nGenerally, lower experience is associated with a higher defect rate.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-entropy-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Entropy Explanation",
+      "visState": "{\"title\":\"Entropy Explanation\",\"type\":\"markdown\",\"params\":{\"markdown\":\"##**Entropy**\\n\\nThis metric measures the average file diffusion of the commits made. For example, if a commits changes 10 files it will have higher entropy than a commit that changes one file.\\n\\nGenerally, higher entropy is associated with a higher defect rate. \\n\\nThis visual should be used informatively. If you expect major changes across many modules, this can confirm that expectation. However, if a small fix needs changes all over the code base, inspection is most likely required.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-bug-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Bug Explanation",
+      "visState": "{\"title\":\"Bug Explanation\",\"type\":\"markdown\",\"params\":{\"markdown\":\"##**Bugs**\\n\\nThis is a count of bugs over time. Use this to reference against the given metrics.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-committer-did-not-reference-issue",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Committer Did Not Reference Issue",
+      "visState": "{\"title\":\"New Visualization\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Number of commits not linked to issues\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"commit_committer_name.raw\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Committer\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:commit AND NOT commit_issue_keys:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-issue-creator-did-not-select-type-or-tag",
+    "_type": "visualization",
+    "_source": {
+      "title": "__title__ Issue Creator Did Not Select Type or Tag",
+      "visState": "{\"title\":\"__index__ Committer Did Not Reference Issue\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{\"customLabel\":\"Number of not classified issues\"}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"customLabel\":\"Issue creator\",\"field\":\"issue_creator_uri.raw\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"query\":\"_type:issue AND NOT issue_types:* AND NOT issue_tags:*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-predicted-defective-files-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Predicted Defective Files",
+      "visState": "{\n  \"title\": \"Predicted Defective Files\",\n  \"type\": \"markdown\",\n  \"params\": {\n    \"markdown\": \"### Predicted Defective Files  \\nThis is a list of files and their defect probabilities. The measurement is based on the historical defect probabilities given a files history of issues and commit changes. \\n\\nThe features are determined by time windows. For example we take into account the number of distinct authors of a file from 2 months to the present.\"\n  },\n  \"aggs\": [],\n  \"listeners\": {}\n}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\n  \"query\": {\n    \"query_string\": {\n      \"query\": \"*\",\n      \"analyze_wildcard\": true\n    }\n  },\n  \"filter\": []\n}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-code-interactions-explanation",
+    "_type": "visualization",
+    "_source": {
+      "title": "Code Interactions",
+      "visState": "{\"title\":\"Code Interactions\",\"type\":\"markdown\",\"params\":{\"markdown\":\"###Code Interactions\\nThis network shows the social coding of the team.\\nEach node is a member of the team.\\nThe ratio of blue to red in each node is the ratio of added lines to deleted lines for that member, respectively. \\n\\nAn edge from member A to member B indicates member A has edited member B's code.\\nThe thickness of the edge indicates the amount of code that was edited.\\n\\nThe graph is arranged such that each member has edited the code of members either in their circle, the circle within their circle, or the circle outside of the their circle.\"},\"aggs\":[],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"query\":{\"query_string\":{\"query\":\"*\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "__index__-defect-likelihood-with-explanation",
+    "_type": "search",
+    "_source": {
+      "title": "__title__ Defect Likelihood",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "file_path",
+        "defect_likelihood",
+        "reason"
+      ],
+      "sort": [
+        "probability",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:file_defect_prediction\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  },
+  {
+  "_id": "__index__-commit-defect-likelihood",
+  "_type": "search",
+  "_source": {
+    "title": "__title__ Commit Defect Likelihood",
+    "description": "",
+    "hits": 0,
+    "columns": [
+      "commit_id",
+      "defect_likelihood"
+    ],
+    "sort": [
+      "timestamp",
+      "desc"
+    ],
+    "version": 1,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"index\":\"__index__\",\"query\":{\"query_string\":{\"analyze_wildcard\":true,\"query\":\"_type:commit_defect_prediction\"}},\"filter\":[],\"highlight\":{\"pre_tags\":[\"@kibana-highlighted-field@\"],\"post_tags\":[\"@/kibana-highlighted-field@\"],\"fields\":{\"*\":{}},\"require_field_match\":false,\"fragment_size\":2147483647}}"
+      }
+    }
+  }
+]
